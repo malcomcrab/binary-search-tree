@@ -37,9 +37,54 @@ class Tree {
         inorderTraversal(node)
         return ans
     }
-    
-}
+    insert(root, newValue){
 
+        if (root === null)
+            return new Node(newValue);
+        
+        if (root.data === newValue)
+            return root
+
+            if(root.data > newValue)
+                root.left = this.insert(root.left, newValue)
+            else if(root.data < newValue)
+                root.right = this.insert(root.right, newValue)
+            
+            return root;
+      
+    }
+    getSuccessor(curr) {
+        curr = curr.right;
+        while (curr !== null && curr.left !== null) {
+            curr = curr.left;
+        }
+        return curr;
+    }
+    delete(root, value){
+
+        if (root === null){
+            return root
+        }
+
+        if (root.data > value){
+            root.left = this.delete(root.left, value)
+        } else if (root.data < value) {
+            root.right = this.delete(root.right, value)
+        } else {
+        
+        if(root.left === null)
+        return root.right
+        
+        if(root.right === null)
+            return root.left
+
+        let successor = this.getSuccessor(root);
+        root.data = successor.value;
+        root.right = this.delete(root.right, successor.value)
+        }
+        return root
+    }
+}
 // Recursive function to construct BST
 function sortedArrayToBSTRecur(arr, start, end) {
     if (start > end) return null;
@@ -64,12 +109,6 @@ function sortedArrayToBST(arr) {
 }
 
 
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-//[1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
-unique = ([...new Set(arr)])
-let checkedArray = unique.sort((a,b) => a-b)
-const root = sortedArrayToBST(checkedArray);
-const tree = new Tree(root)
 
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -85,5 +124,16 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     }
   };
   
+  const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+//[1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
+unique = ([...new Set(arr)])
+let checkedArray = unique.sort((a,b) => a-b)
+const root = sortedArrayToBST(checkedArray);
+const tree = new Tree(root)
+
   prettyPrint(root)
   console.log(tree.find(7))
+  tree.insert(root,6)
+  prettyPrint(root)
+  tree.delete(root, 67)
+  prettyPrint(root)
