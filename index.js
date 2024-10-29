@@ -1,5 +1,5 @@
 
-
+// Class to build each node, left and right to be filled with next node.
 class Node {
     constructor(data){
         this.data = data
@@ -17,36 +17,45 @@ class Tree {
         let node = this.root
         let ans = []
         function inorderTraversal(node){
-            if(node == null ){
+            //Returns if node is a leaf
+            if(node == null){
                 return; 
             } else {
-               // Base case
+               
+            //if correct node found, node is added to answer array
             if (node.data == value)
                 ans = node
         
-            // Recur on the left subtree
+            /* If current node does not contain value the 
+            traversal function is run on the left subtree*/
             inorderTraversal(node.left);
         
         
-            // Recur on the right subtree
+            /* also if th current node does not contain value the 
+            traversal function is run on the left subtree*/
             inorderTraversal(node.right);
              
             }
                 
             }
+        //Initial taversal fuction call    
         inorderTraversal(node)
         return ans
     }
     insert(root, newValue){
-
+        // If root is empty(a leaf), a new node is added with the value
         if (root === null)
             return new Node(newValue);
-        
+        // If root value is a duplicate, function is returned
         if (root.data === newValue)
             return root
 
+            /*if the new value is greater than the root the insert function
+            is called on the left*/
             if(root.data > newValue)
                 root.left = this.insert(root.left, newValue)
+            /* if the value is greater than the root value, insert function 
+            is called on the right */
             else if(root.data < newValue)
                 root.right = this.insert(root.right, newValue)
             
@@ -155,6 +164,7 @@ const tree = new Tree(root)
 function consoleIt(item){
     console.log(item)
 }
+
   prettyPrint(root)
   console.log(tree.find(7))
   tree.insert(root,6)
