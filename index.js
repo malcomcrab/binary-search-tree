@@ -84,6 +84,27 @@ class Tree {
         }
         return root
     }
+    levelOrder(callBack){
+        if(this.root === null)
+            return;
+        if(typeof callBack === 'undefined'){
+            throw Error('No Callback Function Included')
+            
+        }
+
+        let queueArray = []
+        queueArray.push(this.root)
+
+        while(queueArray.length > 0){
+           let currentNode = queueArray.pop()
+            callBack(currentNode)
+            if(currentNode.left != null)
+                queueArray.push(currentNode.left)
+            if(currentNode.right != null)
+                queueArray.push(currentNode.right)
+        }
+        return root
+    }
 }
 // Recursive function to construct BST
 function sortedArrayToBSTRecur(arr, start, end) {
@@ -124,16 +145,20 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     }
   };
   
-  const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 //[1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
 unique = ([...new Set(arr)])
 let checkedArray = unique.sort((a,b) => a-b)
 const root = sortedArrayToBST(checkedArray);
 const tree = new Tree(root)
 
+function consoleIt(item){
+    console.log(item)
+}
   prettyPrint(root)
   console.log(tree.find(7))
   tree.insert(root,6)
   prettyPrint(root)
-  tree.delete(root, 67)
   prettyPrint(root)
+  tree.levelOrder(consoleIt)
+  tree.levelOrder()
