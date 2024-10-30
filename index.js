@@ -115,9 +115,86 @@ class Tree {
         return root
     }
     inOrder(){
-      
+        let node = this.root   // Base case
+        if (node == null)
+            return;
 
-        
+        function inorderTraversal(node){
+            if (node == null)
+                
+                return;
+            
+                
+            /* If current node does not contain value the 
+            traversal function is run on the left subtree*/
+            inorderTraversal(node.left);
+
+            
+            // Visit the current node
+            console.log(node);
+            /* also if th current node does not contain value the 
+            traversal function is run on the left subtree*/
+            inorderTraversal(node.right);
+             
+            }
+                
+            inorderTraversal(node)  
+
+    }
+            preOrder(){
+            let node = this.root   // Base case
+            if (node == null)
+                return;
+    
+            function inorderTraversal(node){
+                if (node == null)
+                    
+                    return;
+                
+                  // Visit the current node
+                console.log(node);  
+                /* If current node does not contain value the 
+                traversal function is run on the left subtree*/
+                inorderTraversal(node.left);
+    
+                
+                
+                /* also if th current node does not contain value the 
+                traversal function is run on the left subtree*/
+                inorderTraversal(node.right);
+                 
+                }
+                    
+                inorderTraversal(node)  
+    
+    }
+    postOrder(){
+        let node = this.root   // Base case
+        if (node == null)
+            return;
+
+        function inorderTraversal(node){
+            if (node == null)
+                
+                return;
+            
+          
+            /* If current node does not contain value the 
+            traversal function is run on the left subtree*/
+            inorderTraversal(node.left);
+
+            
+            
+            /* also if th current node does not contain value the 
+            traversal function is run on the left subtree*/
+            inorderTraversal(node.right);
+             
+            // Visit the current node
+            console.log(node);  
+            }
+                
+            inorderTraversal(node)  
+
     }
 }
 
@@ -160,7 +237,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     }
   };
   
-const arr = [1, 7, 6, 10, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const arr = [4,2,1,5,3];
 //[1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
 unique = ([...new Set(arr)])
 let checkedArray = unique.sort((a,b) => a-b)
@@ -173,9 +250,10 @@ function consoleIt(item){
 
   
   console.log(tree.find(7))
-  tree.insert(root,98)
   prettyPrint(root)
-  tree.inOrder()
+  //tree.inOrder()
+  //tree.preOrder()
+  tree.postOrder()
   //prettyPrint(root)
   //tree.levelOrder(consoleIt)
   //tree.levelOrder()
