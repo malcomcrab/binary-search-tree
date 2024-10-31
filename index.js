@@ -69,8 +69,9 @@ class Tree {
         }
         return curr;
     }
+    // Delete the value input by user.
     delete(root, value){
-
+        // If the tree is empty return root. 
         if (root === null){
             return root
         }
@@ -93,6 +94,9 @@ class Tree {
         }
         return root
     }
+    /* Run through the tree in level order and visit each node.
+    a call back function is called on each node. if no function is included
+    an error is thrown. */
     levelOrder(callBack){
         if(this.root === null)
             return;
